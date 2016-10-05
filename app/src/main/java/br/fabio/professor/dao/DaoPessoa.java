@@ -3,15 +3,10 @@ package br.fabio.professor.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
-import br.fabio.professor.br.fabio.professor.modelo.Pessoa;
+import br.fabio.professor.modelo.Pessoa;
 
 public class DaoPessoa {
     private Context context;

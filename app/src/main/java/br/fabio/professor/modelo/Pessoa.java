@@ -1,4 +1,4 @@
-package br.fabio.professor.br.fabio.professor.modelo;
+package br.fabio.professor.modelo;
 
 public class Pessoa {
     private long id;

@@ -1,8 +1,8 @@
 package br.fabio.professor.dao;
 
-import java.util.ArrayList;
-
 import android.database.Cursor;
+
+import java.util.ArrayList;
 
 public class ObjetoBanco {
     private ArrayList<String> colunasName = new ArrayList<String>(); //Nome das colunas da tabela
