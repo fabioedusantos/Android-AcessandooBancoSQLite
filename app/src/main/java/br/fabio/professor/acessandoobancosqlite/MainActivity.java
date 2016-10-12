@@ -3,6 +3,9 @@ package br.fabio.professor.acessandoobancosqlite;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +18,7 @@ import br.fabio.professor.modelo.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final int menuCadastrar = 6543;
     private ListView lista;
     private DaoPessoa daoPessoa;
 
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         for(Pessoa p : pessoas){
             values.add(p.getNome());
         }
+        Log.e("apk", values.size() + "");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
@@ -56,5 +61,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lista.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, menuCadastrar, 0, "Cadastrar");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case menuCadastrar:
+                Intent i = new Intent(MainActivity.this, CadastrarActivity.class);
+                startActivity(i);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -57,7 +57,7 @@ public class DaoPessoa {
     //Método de consulta geral
     public ArrayList<Pessoa> getTodos() {
         ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
-        ObjetoBanco ob = banco.queryConsulta("SELECT * FROM pessoa ORDER BY id DESC", null);
+        ObjetoBanco ob = banco.queryConsulta("SELECT * FROM pessoa ORDER BY nome ASC", null);
 
         if (ob != null) {
             for (int i = 0; i < ob.size(); i++) {
