@@ -1,6 +1,8 @@
 package br.fabio.professor.acessandoobancosqlite;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         lista = (ListView) findViewById(R.id.lista);
         daoPessoa = new DaoPessoa(this);
+
+        setTitle("Listar Pessoas");
     }
 
     @Override
@@ -56,7 +61,24 @@ public class MainActivity extends AppCompatActivity {
 
         lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final Pessoa p = pessoas.get(position);
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setMessage("Tem certeza que deseja remover " + p.getNome() + "?").setCancelable(false)
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                if (daoPessoa.delete(p.getId())) {
+                                    Toast.makeText(MainActivity.this, p.getNome() + " removido com Sucesso",
+                                            Toast.LENGTH_SHORT).show();
+                                    onResume();
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Erro ao remover " + p.getNome(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).setNegativeButton("Não", null).show();
+
                 return false;
             }
         });
